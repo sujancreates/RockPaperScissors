@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.container{
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8.5px);
+    border: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+h1{
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+}
+
+.choices{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button{
+    width: 90px;
+    height: 90px;
+    font-size: 40px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: white;
+}
+
+button:hover{
+    transform: translate(-8px) scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+button:active{
+    transform: scale(0.95);
+}
+
+
+.scroreboard{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.result {
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 12px;
+    animation: pop 0.4s ease;
+}
+
+.result.win {
+    background: rgba(0, 255, 0, 0.15);
+    color: #00ffae;
+}
+
+.result.lose {
+    background: rgba(255, 0, 0, 0.15);
+    color: #ff6b6b;
+}
+
+.result.tie {
+    background: rgba(255, 255, 0, 0.15);
+    color: #ffe66d;
+}
+
+.reset-btn {
+    margin-top: 15px;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 80px;
+    background: #4fd44d;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.reset-btn:hover {
+    background: #ff3b3b;
+}
+
+
+@keyframes pop {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@media (max-width: 600px) {
+    .choices {
+        flex-direction: column;
+    }
+    
+    button{
+        width: 80px;
+        height: 80px;
+    }
+}

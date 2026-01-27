@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissor</title>
+    <link rel="stylesheet" href="./static/home.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Rock Paper Scissors Game</h1>
+
+        <form method="POST" class="choices">
+            <button type="submit" name="choice" value="rock">✊</button>
+            <button type="submit" name="choice" value="paper">✋</button>
+            <button type="submit" name="choice" value="scissors">✌️</button>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <p>Your choice: <strong>{{ user_choice }}</strong></p>
+            <p>Computer's choice: <strong>{{ computer_choice }}</strong></p>
+
+            {% if result == 'win' %}
+                <h2>You Win! 🎉</h2>
+            {% elif result == 'lose' %}
+                <h2>You Lose! 😞</h2>
+            {% else %}
+                <h2>Result: <strong>{{ result }}</strong></h2>
+            {% endif %}
+        </div>
+        {% endif %}
+        <div class="scoreboard">
+            <span>You: {{ user_score }}</span>
+            <span>Computer: {{ computer_score }}</span> 
+        </div>
+            <form action="/reset" method="GET">
+        <button class="reset-btn">🔃</button>
+    </form>
+    </div>
+</body>
+</html>
