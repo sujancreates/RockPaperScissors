@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, redirect, render_template, request, session, redirect
 import random
 
 app = Flask(__name__)
@@ -16,7 +16,7 @@ def determine_winner(user_choice, computer_choice):
     ):
         return 'You win 🎉'
     else:
-        return 'Computer wins 🤖'
+        return 'You lose 🤖'
     
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -33,7 +33,7 @@ def home():
 
         if result == 'You win 🎉':
             session['user_score'] += 1
-        elif result == 'Computer wins 🤖':
+        elif result == 'You lose 🤖':
             session['computer_score'] += 1
 
     return render_template(
@@ -49,7 +49,7 @@ def home():
 def reset():
     session['user_score'] = 0
     session['computer_score'] = 0   
-    return redirect(url_for('home'))
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True)

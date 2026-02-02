@@ -1,19 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissor</title>
+    <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="./static/home.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
+
 <body>
-    <div class="container">
+    <div class="game-box" {% if result %}shake{% endif %}>
+        <h1>🎮 Rock Paper Scissors</h1>
+
+        <div class="scoreboard">
+            You: {{ user_score }} | Computer: {{ computer_score }}
+        </div>
+
+        <form method="POST" class="choices">
+            <button type="submit" name="choice" value="rock">🪨</button>
+            <button type="submit" name="choice" value="paper">📄</button>
+            <button type="submit" name="choice" value="scissors">✂️</button>
+        </form>
+
+        {% if result %}
+        <div class="result  {% if 'You win' in result %}win
+        {% elif 'You lose' in result %}lose
+        {% else %}tie{% endif %}">
+            Your choice: <strong>{{ user_choice }}</strong><br>
+            Computer's choice: <strong>{{ computer_choice }}</strong><br><br>
+            {{result}}
+        </div>
+        {% endif %}
+
+        <form action="/reset" method="GET">
+            <button class="reset-btn">Reset Game</button>
+    </div>
+
+    <!-- Sounds -->
+    <audio id="winSound" src="/static/sound/win.mp3"></audio>
+    <audio id="loseSound" src="/static/sound/lose.mp3"></audio>
+    <audio id="tieSound" src="/static/sound/tie.mp3"></audio>
+
+    <!-- Play sound -->
+    <script>
+        const result = "{{ result }}";
+
+        function playsound(id) {
+            document.getElementById(id);
+            sound.currentTime = 0;
+            sound.play().catch(() => { });
+        }
+
+        if (result == "You win 🎉") {
+            document.getElementById("winSound").play();
+            confetti({ particleCount: 250, spread: 80 });
+        }
+        else if (result == "You lose 🤖") {
+            document.getElementById("loseSound").play();
+            confetti({ particleCount: 100, spread: 50, colors: ['#ff0000', '#000000'] });
+        }
+        else if (result == "Tie 🤝") {
+            document.getElementById("tieSound").play();
+            confetti({ particleCount: 150, spread: 70, colors: ['#808080', '#C0C0C0'] });
+        }
+    </script>
+
+    </script>
+
+    <!-- <div class="container">
         <h1>Welcome to Rock Paper Scissors Game</h1>
 
         <form method="POST" class="choices">
-            <button type="submit" name="choice" value="rock">✊</button>
-            <button type="submit" name="choice" value="paper">✋</button>
-            <button type="submit" name="choice" value="scissors">✌️</button>
+            <button type="submit" name="choice" value="rock">🪨</button>
+            <button type="submit" name="choice" value="paper">📄</button>
+            <button type="submit" name="choice" value="scissors">✂️</button>
         </form>
 
         {% if result %}
@@ -37,6 +98,7 @@
             <form action="/reset" method="GET">
         <button class="reset-btn">🔃</button>
     </form>
-    </div>
+    </div> -->
 </body>
+
 </html>
